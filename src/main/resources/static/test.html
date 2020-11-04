@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<!--    &lt;!&ndash;使用Bootstrap的js插件，必须先调入jQuery&ndash;&gt;-->
+<script src="http://libs.baidu.com/jquery/1.9.0 /jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="tt" value="只读">
+<input type="button" onclick="" value="清除">
+<form role="form">
+    <div class="form-group">
+        <label for="name">名称</label>
+        <input type="text" class="form-control" id="name" placeholder="请输入名称">
+    </div>
+    <div class="form-group">
+        <label for="name">年龄</label>
+        <input type="text" class="form-control" id="age" placeholder="请输入年龄">
+    </div>
+    <div class="form-group">
+        <label for="name">地址</label>
+        <input type="text" class="form-control" id="address" placeholder="请输入地址">
+    </div>
+    <input id="sub" type="button" value="新增">
+</form>
+</body>
+<!--<script type="text/javascript" src="js/goDate.js"></script>-->
+<script type="text/javascript">
+    $("#sub").click(function () {
+        var name = $("#name").val();
+        var age = $("#age").val();
+        var address = $("#address").val();
+        var user={
+            "name" : name,
+            "age" : age,
+            "address" : address
+        }
+        //将实体转化为json
+
+        var userJson = JSON.stringify(user);
+
+        console.log(userJson);
+        //提交给接口
+        $.post({
+            url:'user/save',
+            data:'userJson',
+            contentType:'application/json;charset=utf-8',
+            success:function (data) {
+                alert(data)
+            }
+        })
+    })
+</script>
+</html>
